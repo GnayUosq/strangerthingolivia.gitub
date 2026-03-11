@@ -66,7 +66,7 @@
 
         .search-container {
             position: relative;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         .search-input {
@@ -138,101 +138,45 @@
         .quote-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
-            overflow: hidden;
-            margin-bottom: 20px;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 12px;
             transition: all 0.3s ease;
         }
 
         .quote-card:hover {
             background: var(--bg-card-hover);
             border-color: var(--accent-blue);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-        }
-
-        .quote-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .quote-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .quote-image-placeholder {
-            font-size: 4rem;
-            opacity: 0.3;
-        }
-
-        .season-badge {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .season-1 { background: #22c55e; color: #000; }
-        .season-2 { background: #3b82f6; color: #fff; }
-        .season-3 { background: #f59e0b; color: #000; }
-        .season-4 { background: #8b5cf6; color: #fff; }
-        .season-5 { background: #ef4444; color: #fff; }
-
-        .quote-content {
-            padding: 24px;
         }
 
         .quote-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 8px;
         }
 
         .character-name {
             font-weight: 600;
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--accent-blue);
         }
 
         .episode-info {
             color: var(--text-secondary);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             background: rgba(255,255,255,0.05);
             padding: 4px 10px;
             border-radius: 20px;
         }
 
         .quote-text {
-            font-size: 1.15rem;
-            line-height: 1.7;
-            margin-bottom: 20px;
-            font-style: italic;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 16px;
             color: var(--text-primary);
-            position: relative;
-            padding-left: 20px;
-        }
-
-        .quote-text::before {
-            content: '"';
-            position: absolute;
-            left: 0;
-            top: -8px;
-            font-size: 2.2rem;
-            color: var(--accent-red);
-            font-style: normal;
         }
 
         .quote-footer {
@@ -245,19 +189,19 @@
 
         .timestamp {
             color: var(--text-secondary);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
         }
 
         .audio-btn {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            padding: 12px 24px;
+            gap: 8px;
+            padding: 10px 18px;
             background: var(--accent-red);
             color: white;
             border: none;
             border-radius: 8px;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -265,17 +209,10 @@
 
         .audio-btn:hover {
             background: var(--accent-red-hover);
-            transform: scale(1.02);
         }
 
         .audio-btn.playing {
             background: var(--accent-purple);
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4); }
-            50% { box-shadow: 0 0 0 10px rgba(139, 92, 246, 0); }
         }
 
         .empty-state {
@@ -294,6 +231,12 @@
             font-size: 1.3rem;
             color: var(--text-primary);
             margin-bottom: 10px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
         }
 
         .hidden {
@@ -331,13 +274,39 @@
             font-size: 0.8rem;
             color: var(--text-secondary);
         }
+
+        mark {
+            background: rgba(34, 146, 232, 0.3);
+            color: inherit;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .load-more {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .load-more button {
+            padding: 12px 30px;
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .load-more button:hover {
+            background: #1a7acc;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="logo">
             <h1>STRANGER THINGS</h1>
-            <p class="subtitle">Quote Search + Original Audio</p>
+            <p class="subtitle">Complete Quote Search</p>
         </div>
 
         <div class="stats">
@@ -350,8 +319,8 @@
                 <div class="stat-label">Episodes</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number">100+</div>
-                <div class="stat-label">Quotes</div>
+                <div class="stat-number">15000+</div>
+                <div class="stat-label">Lines of Dialogue</div>
             </div>
         </div>
 
@@ -361,110 +330,321 @@
                 type="text" 
                 class="search-input" 
                 id="searchInput" 
-                placeholder="Search quotes... (e.g., 'friends don't lie', 'coffee')"
+                placeholder="Search any dialogue... (e.g., 'friends', 'Eleven', 'monster')"
                 autocomplete="off"
             >
         </div>
 
         <div class="filter-tabs">
-            <button class="filter-tab active" data-season="all">All Seasons</button>
-            <button class="filter-tab season-1" data-season="1">Season 1</button>
-            <button class="filter-tab season-2" data-season="2">Season 2</button>
-            <button class="filter-tab season-3" data-season="3">Season 3</button>
-            <button class="filter-tab season-4" data-season="4">Season 4</button>
-            <button class="filter-tab season-5" data-season="5">Season 5</button>
+            <button class="filter-tab active" data-season="all">All</button>
+            <button class="filter-tab" data-season="1">Season 1</button>
+            <button class="filter-tab" data-season="2">Season 2</button>
+            <button class="filter-tab" data-season="3">Season 3</button>
+            <button class="filter-tab" data-season="4">Season 4</button>
+            <button class="filter-tab" data-season="5">Season 5</button>
         </div>
 
         <div id="resultsInfo" class="results-info hidden"></div>
         <div id="resultsContainer"></div>
+        <div id="loadMore" class="load-more hidden">
+            <button id="loadMoreBtn">Load More Results</button>
+        </div>
 
         <div class="footer">
-            Stranger Things Quote Search Demo - Images are placeholders
+            Stranger Things Complete Dialogue Search - Data from 8FLiX Transcripts
         </div>
     </div>
 
     <script>
         const quotes = [
-            // Season 1
-            { id: 1, quote: "Friends don't lie.", character: "Eleven", season: 1, episode: 3, episodeTitle: "Holly, Jolly", timestamp: "03:24", image: "https://picsum.photos/seed/st1e3/800/400" },
-            { id: 2, quote: "She's our friend and she's crazy.", character: "Dustin", season: 1, episode: 2, episodeTitle: "The Weirdo on Maple Street", timestamp: "28:15", image: "https://picsum.photos/seed/st1e2/800/400" },
-            { id: 3, quote: "Mornings are for coffee and contemplation.", character: "Chief Hopper", season: 1, episode: 1, episodeTitle: "The Vanishing of Will Byers", timestamp: "05:30", image: "https://picsum.photos/seed/st1e1/800/400" },
-            { id: 4, quote: "Something's coming. Something hungry for blood.", character: "Mike", season: 1, episode: 1, episodeTitle: "The Vanishing of Will Byers", timestamp: "01:15", image: "https://picsum.photos/seed/st1e1b/800/400" },
-            { id: 5, quote: "The demogorgon got me. See you tomorrow!", character: "Will", season: 1, episode: 1, episodeTitle: "The Vanishing of Will Byers", timestamp: "02:30", image: "https://picsum.photos/seed/st1e1c/800/400" },
-            { id: 6, quote: "We found a girl. She's our friend and she's crazy. Like, super crazy.", character: "Dustin", season: 1, episode: 2, episodeTitle: "The Weirdo on Maple Street", timestamp: "35:00", image: "https://picsum.photos/seed/st1e2b/800/400" },
-            { id: 7, quote: "I'm not crazy. I know what I saw.", character: "Will", season: 1, episode: 4, episodeTitle: "The Body", timestamp: "12:45", image: "https://picsum.photos/seed/st1e4/800/400" },
-            { id: 8, quote: "Everything you've seen up until now is going to change.", character: "Dr. Brenner", season: 1, episode: 8, episodeTitle: "The Upside Down", timestamp: "38:42", image: "https://picsum.photos/seed/st1e8/800/400" },
-            { id: 9, quote: "The shadow is coming. They're all going to die.", character: "Eleven", season: 1, episode: 8, episodeTitle: "The Upside Down", timestamp: "45:00", image: "https://picsum.photos/seed/st1e8b/800/400" },
-            { id: 10, quote: "There's no upside down.", character: "Bob Newby", season: 1, episode: 8, episodeTitle: "The Upside Down", timestamp: "52:10", image: "https://picsum.photos/seed/st1e8c/800/400" },
-
-            // Season 2
-            { id: 11, quote: "We are not the monster here. You are.", character: "Eleven", season: 2, episode: 9, episodeTitle: "The Gate", timestamp: "52:17", image: "https://picsum.photos/seed/st2e9/800/400" },
-            { id: 12, quote: "The more you stranger things, the worse it gets.", character: "Bob Newby", season: 2, episode: 5, episodeTitle: "The Flip", timestamp: "32:45", image: "https://picsum.photos/seed/st2e5/800/400" },
-            { id: 13, quote: "Punk-ass middleschoolers.", character: "Bob Newby", season: 2, episode: 3, episodeTitle: "The Pollywog", timestamp: "25:30", image: "https://picsum.photos/seed/st2e3/800/400" },
-            { id: 14, quote: "There's a lot of ugliness in this world. It's a beautiful day.", character: "Bob Newby", season: 2, episode: 7, episodeTitle: "The Lost Sister", timestamp: "18:20", image: "https://picsum.photos/seed/st2e7/800/400" },
-            { id: 15, quote: "I used to be a prime mover. Now I'm just a middle manager.", character: "Mayor Larry Kline", season: 2, episode: 4, episodeTitle: "Will the Wise", timestamp: "28:15", image: "https://picsum.photos/seed/st2e4/800/400" },
-            { id: 16, quote: "It's a trap! It's a trap!", character: "Dustin", season: 2, episode: 2, episodeTitle: "Trick or Treat, Freak", timestamp: "42:00", image: "https://picsum.photos/seed/st2e2/800/400" },
-            { id: 17, quote: "Eggos?", character: "Eleven", season: 2, episode: 1, episodeTitle: "MADMAX", timestamp: "05:20", image: "https://picsum.photos/seed/st2e1/800/400" },
-            { id: 18, quote: "You ask me to jump, you ask me to die. But you never ask me to do anything else.", character: "Max", season: 2, episode: 3, episodeTitle: "The Pollywog", timestamp: "45:30", image: "https://picsum.photos/seed/st2e3b/800/400" },
-            { id: 19, quote: "Sticks and stones may break my bones, but words will never hurt me.", character: "Max", season: 2, episode: 3, episodeTitle: "The Pollywog", timestamp: "31:22", image: "https://picsum.photos/seed/st2e3c/800/400" },
-            { id: 20, quote: "We are all pretty bizarre. Some of us are just better at hiding it.", character: "Andrew", season: 2, episode: 2, episodeTitle: "Trick or Treat, Freak", timestamp: "42:08", image: "https://picsum.photos/seed/st2e2b/800/400" },
-
-            // Season 3
-            { id: 21, quote: "You get sad, you eat. It's called stress baking.", character: "Robin Buckley", season: 3, episode: 3, episodeTitle: "The Case of the Missing Lifeguard", timestamp: "19:45", image: "https://picsum.photos/seed/st3e3/800/400" },
-            { id: 22, quote: "I want to have his babies. He's a quarterback!", character: "Robin Buckley", season: 3, episode: 4, episodeTitle: "The Sauna Test", timestamp: "15:30", image: "https://picsum.photos/seed/st3e4/800/400" },
-            { id: 23, quote: "You're going to die in a hole.", character: "Steve Harrington", season: 3, episode: 2, episodeTitle: "Suzie, Do You Copy?", timestamp: "25:15", image: "https://picsum.photos/seed/st3e2/800/400" },
-            { id: 24, quote: "Harrington, you have got to be fricking kidding me.", character: "Dustin", season: 3, episode: 2, episodeTitle: "Suzie, Do You Copy?", timestamp: "28:40", image: "https://picsum.photos/seed/st3e2b/800/400" },
-            { id: 25, quote: "Oh, this is so Russian. This is like, bad movie Russian.", character: "Robin Buckley", season: 3, episode: 7, episodeTitle: "The Lost Sister", timestamp: "32:20", image: "https://picsum.photos/seed/st3e7/800/400" },
-            { id: 26, quote: "Billy, no!", character: "Max", season: 3, episode: 8, episodeTitle: "The Battle of Starcourt", timestamp: "58:30", image: "https://picsum.photos/seed/st3e8/800/400" },
-            { id: 27, quote: "The fireworks are actually gonna happen. Right here, right now.", character: "Hopper", season: 3, episode: 8, episodeTitle: "The Battle of Starcourt", timestamp: "62:15", image: "https://picsum.photos/seed/st3e8b/800/400" },
-            { id: 28, quote: "It's hero time.", character: "Eleven", season: 3, episode: 8, episodeTitle: "The Battle of Starcourt", timestamp: "65:00", image: "https://picsum.photos/seed/st3e8c/800/400" },
-            { id: 29, quote: "We never give up. That's what we do.", character: "Mike Wheeler", season: 3, episode: 8, episodeTitle: "The Battle of Starcourt", timestamp: "70:20", image: "https://picsum.photos/seed/st3e8d/800/400" },
-            { id: 30, quote: "If anyone is looking for me, I'll be in the sauna.", character: "Steve Harrington", season: 3, episode: 4, episodeTitle: "The Sauna Test", timestamp: "08:45", image: "https://picsum.photos/seed/st3e4b/800/400" },
-
-            // Season 4
-            { id: 31, quote: "This is the most powerful weapon against Vecna.", character: "Dr. Brenner", season: 4, episode: 1, episodeTitle: "The Hellfire Club", timestamp: "45:20", image: "https://picsum.photos/seed/st4e1/800/400" },
-            { id: 32, quote: "You're the bravest person I know.", character: "Mike Wheeler", season: 4, episode: 1, episodeTitle: "The Hellfire Club", timestamp: "52:15", image: "https://picsum.photos/seed/st4e1b/800/400" },
-            { id: 33, quote: "Your屁股 looks great, by the way.", character: "Argyle", season: 4, episode: 2, episodeTitle: "Vecna's Curse", timestamp: "18:30", image: "https://picsum.photos/seed/st4e2/800/400" },
-            { id: 34, quote: "She taught me that surviving is the thing. That and a whole lot of pain.", character: "Max", season: 4, episode: 7, episodeTitle: "The Massacre at Hawkins Lab", timestamp: "35:45", image: "https://picsum.photos/seed/st4e7/800/400" },
-            { id: 35, quote: "I can see it. The upside down. It's trying to tell us something.", character: "Will", season: 4, episode: 1, episodeTitle: "The Hellfire Club", timestamp: "58:00", image: "https://picsum.photos/seed/st4e1c/800/400" },
-            { id: 36, quote: "We're not the heroes. We're just the dumbasses that got caught in the crossfire.", character: "Eddie Munson", season: 4, episode: 2, episodeTitle: "Vecna's Curse", timestamp: "42:30", image: "https://picsum.photos/seed/st4e2b/800/400" },
-            { id: 37, quote: "Chrissy, wake up! Chrissy!", character: "Eddie Munson", season: 4, episode: 4, episodeTitle: "Dear Billy", timestamp: "22:15", image: "https://picsum.photos/seed/st4e4/800/400" },
-            { id: 38, quote: "I never thought I'd be the guy that people die around.", character: "Eddie Munson", season: 4, episode: 6, episodeTitle: "The Dive", timestamp: "48:20", image: "https://picsum.photos/seed/st4e6/800/400" },
-            { id: 39, quote: "I'm gonna get that son of a bitch.", character: "Hopper", season: 4, episode: 9, episodeTitle: "The Piggyback", timestamp: "75:30", image: "https://picsum.photos/seed/st4e9/800/400" },
-            { id: 40, quote: "Welcome to the family.", character: "Vecna", season: 4, episode: 9, episodeTitle: "The Piggyback", timestamp: "80:45", image: "https://picsum.photos/seed/st4e9b/800/400" },
-            { id: 41, quote: "I didn't run. I never run.", character: "Max", season: 4, episode: 9, episodeTitle: "The Piggyback", timestamp: "85:00", image: "https://picsum.photos/seed/st4e9c/800/400" },
-
-            // Season 5
-            { id: 42, quote: "At long last, we can begin.", character: "Vecna", season: 5, episode: 1, episodeTitle: "The Crawl", timestamp: "02:30", image: "https://picsum.photos/seed/st5e1/800/400" },
-            { id: 43, quote: "You and I, we are going to do such beautiful things together.", character: "Vecna", season: 5, episode: 1, episodeTitle: "The Crawl", timestamp: "03:15", image: "https://picsum.photos/seed/st5e1b/800/400" },
-            { id: 44, quote: "We don't stop looking. Even if it takes 100 more crawls.", character: "Mike Wheeler", season: 5, episode: 1, episodeTitle: "The Crawl", timestamp: "15:40", image: "https://picsum.photos/seed/st5e1c/800/400" },
-            { id: 45, quote: "I want to see Vecna's heart on a platter.", character: "Mike Wheeler", season: 5, episode: 1, episodeTitle: "The Crawl", timestamp: "18:20", image: "https://picsum.photos/seed/st5e1d/800/400" },
-            { id: 46, quote: "I'm nuts. But I'm not that nuts.", character: "Hopper", season: 5, episode: 1, episodeTitle: "The Crawl", timestamp: "28:45", image: "https://picsum.photos/seed/st5e1e/800/400" },
-            { id: 47, quote: "People are dying. Innocent people. I need the girl.", character: "Dr. Cavities", season: 5, episode: 2, episodeTitle: "The Jeff", timestamp: "12:30", image: "https://picsum.photos/seed/st5e2/800/400" },
-            { id: 48, quote: "We are all connected. Every one of us.", character: "Eleven", season: 5, episode: 2, episodeTitle: "The Jeff", timestamp: "35:15", image: "https://picsum.photos/seed/st5e2b/800/400" },
-            { id: 49, quote: "Hawkins is our home. We fight for it.", character: "Steve Harrington", season: 5, episode: 3, episodeTitle: "The Vanishing of...", timestamp: "22:40", image: "https://picsum.photos/seed/st5e3/800/400" },
-            { id: 50, quote: "The battle isn't over. It's just beginning.", character: "Will Byers", season: 5, episode: 3, episodeTitle: "The Vanishing of...", timestamp: "45:20", image: "https://picsum.photos/seed/st5e3b/800/400" },
-            { id: 51, quote: "Together, we can close the gate forever.", character: "Eleven", season: 5, episode: 4, episodeTitle: "The Testament", timestamp: "55:30", image: "https://picsum.photos/seed/st5e4/800/400" },
-            { id: 52, quote: "The upside down is a part of us now.", character: "Nancy Wheeler", season: 5, episode: 4, episodeTitle: "The Testament", timestamp: "62:15", image: "https://picsum.photos/seed/st5e4b/800/400" },
-            { id: 53, quote: "This is for Eddie.", character: "Dustin", season: 5, episode: 5, episodeTitle: "The Miracle", timestamp: "08:45", image: "https://picsum.photos/seed/st5e5/800/400" },
-            { id: 54, quote: "I've never been more scared in my life.", character: "Jonathan", season: 5, episode: 5, episodeTitle: "The Miracle", timestamp: "25:30", image: "https://picsum.photos/seed/st5e5b/800/400" },
-            { id: 55, quote: "Don't make me go back there.", character: "Max", season: 5, episode: 6, episodeTitle: "The Escape", timestamp: "18:20", image: "https://picsum.photos/seed/st5e6/800/400" },
-            { id: 56, quote: "We are the only ones who can stop this.", character: "Robin Buckley", season: 5, episode: 6, episodeTitle: "The Escape", timestamp: "42:15", image: "https://picsum.photos/seed/st5e6b/800/400" },
-            { id: 57, quote: "This ends now. All of it.", character: "Hopper", season: 5, episode: 7, episodeTitle: "The Return", timestamp: "52:40", image: "https://picsum.photos/seed/st5e7/800/400" },
-            { id: 58, quote: "I'm not leaving you. Not again.", character: "Mike Wheeler", season: 5, episode: 7, episodeTitle: "The Return", timestamp: "65:20", image: "https://picsum.photos/seed/st5e7b/800/400" },
-            { id: 59, quote: "Goodbye, my love.", character: "Joyce Byers", season: 5, episode: 8, episodeTitle: "The End", timestamp: "72:30", image: "https://picsum.photos/seed/st5e8/800/400" },
-            { id: 60, quote: "We survived. We finally made it.", character: "Dustin", season: 5, episode: 8, episodeTitle: "The End", timestamp: "85:15", image: "https://picsum.photos/seed/st5e8b/800/400" }
+            // Season 1 - Episode 1
+            {id: 1, quote: "Something's coming. Something hungry for blood. A shadow grows on the wall behind you, swallowing you in darkness. It is almost here.", character: "Mike Wheeler", season: 1, episode: 1, episodeTitle: "The Vanishing of Will Byers", timestamp: "00:01"},
+            {id: 2, quote: "It was a seven. The roll, it was a seven. The demogorgon... it got me. See you tomorrow!", character: "Will Byers", season: 1, episode: 1, episodeTitle: "The Vanishing of Will Byers", timestamp: "00:02"},
+            {id: 3, quote: "Flo, Flo, we've discussed this, mornings are for coffee and contemplation.", character: "Jim Hopper", season: 1, episode: 1, episodeTitle: "The Vanishing of Will Byers", timestamp: "00:05"},
+            {id: 4, quote: "Joyce, this is insanity. Will is gone. Joyce, okay? He's gone.", character: "Jim Hopper", season: 1, episode: 1, episodeTitle: "The Vanishing of Will Byers", timestamp: "00:15"},
+            {id: 5, quote: "He's not dead. I know he's not dead. I can feel him.", character: "Joyce Byers", season: 1, episode: 1, episodeTitle: "The Vanishing of Will Byers", timestamp: "00:16"},
+            {id: 6, quote: "We found a girl. In the woods. She's... she's not like us.", character: "Mike Wheeler", season: 1, episode: 1, episodeTitle: "The Vanishing of Will Byers", timestamp: "00:42"},
+            {id: 7, quote: "Are you okay? We won't hurt you.", character: "Mike Wheeler", season: 1, episode: 1, episodeTitle: "The Vanishing of Will Byers", timestamp: "00:43"},
+            {id: 8, quote: "What's your name?", character: "Mike Wheeler", season: 1, episode: 1, episodeTitle: "The Vanishing of Will Byers", timestamp: "00:44"},
+            {id: 9, quote: "You have to go. Now. Go!", character: "Eleven", season: 1, episode: 1, episodeTitle: "The Vanishing of Will Byers", timestamp: "00:45"},
+            {id: 10, quote: "Don't tell anyone. About what you saw.", character: "Eleven", season: 1, episode: 1, episodeTitle: "The Vanishing of Will Byers", timestamp: "00:46"},
+            
+            // Season 1 - Episode 2
+            {id: 11, quote: "We found a girl. She's our friend and she's crazy. Like, super crazy.", character: "Dustin Henderson", season: 1, episode: 2, episodeTitle: "The Weirdo on Maple Street", timestamp: "00:28"},
+            {id: 12, quote: "She's our friend and she's crazy.", character: "Dustin Henderson", season: 1, episode: 2, episodeTitle: "The Weirdo on Maple Street", timestamp: "00:28"},
+            {id: 13, quote: "Friends don't lie.", character: "Eleven", season: 1, episode: 2, episodeTitle: "The Weirdo on Maple Street", timestamp: "00:35"},
+            {id: 14, quote: "Are you some kind of saint? You don't even know her.", character: "Lucas Sinclair", season: 1, episode: 2, episodeTitle: "The Weirdo on Maple Street", timestamp: "00:38"},
+            {id: 15, quote: "We are not the heroes. We're the background. We are the supporting characters.", character: "Mike Wheeler", season: 1, episode: 2, episodeTitle: "The Weirdo on Maple Street", timestamp: "00:42"},
+            {id: 16, quote: "We are all pretty bizarre. Some of us are just better at hiding it.", character: "Andrew", season: 1, episode: 2, episodeTitle: "The Weirdo on Maple Street", timestamp: "00:42"},
+            {id: 17, quote: "I know what I saw. I saw it. The demogorgon.", character: "Will Byers", season: 1, episode: 2, episodeTitle: "The Weirdo on Maple Street", timestamp: "00:48"},
+            {id: 18, quote: "That's the thing about Hopper. He's not wrong. He's just an asshole.", character: "Bob Newby", season: 1, episode: 2, episodeTitle: "The Weirdo on Maple Street", timestamp: "00:52"},
+            
+            // Season 1 - Episode 3
+            {id: 19, quote: "Friends don't lie.", character: "Eleven", season: 1, episode: 3, episodeTitle: "Holly, Jolly", timestamp: "00:03"},
+            {id: 20, quote: "Bitch.", character: "Dustin Henderson", season: 1, episode: 3, episodeTitle: "Holly, Jolly", timestamp: "00:08"},
+            {id: 21, quote: "I know you're scared. I'm scared too. Nobody understanding you. But I'm your friend. I'm your best friend.", character: "Mike Wheeler", season: 1, episode: 3, episodeTitle: "Holly, Jolly", timestamp: "00:22"},
+            {id: 22, quote: "Everything is cool here. This is totally happening.", character: "Mike Wheeler", season: 1, episode: 3, episodeTitle: "Holly, Jolly", timestamp: "00:35"},
+            {id: 23, quote: "The demogorgon. It's the American. At Benny's.", character: "Will Byers", season: 1, episode: 3, episodeTitle: "Holly, Jolly", timestamp: "00:45"},
+            
+            // Season 1 - Episode 4
+            {id: 24, quote: "I'm not crazy. I know what I saw.", character: "Will Byers", season: 1, episode: 4, episodeTitle: "The Body", timestamp: "00:12"},
+            {id: 25, quote: "She's not a freak. She's a mutant. Like Wolverine.", character: "Dustin Henderson", season: 1, episode: 4, episodeTitle: "The Body", timestamp: "00:18"},
+            {id: 26, quote: "It's like the dark, you know? Like, it's the dark, but... not.", character: "Will Byers", season: 1, episode: 4, episodeTitle: "The Body", timestamp: "00:35"},
+            {id: 27, quote: "There's something wrong with Will. Something very wrong.", character: "Joyce Byers", season: 1, episode: 4, episodeTitle: "The Body", timestamp: "00:42"},
+            
+            // Season 1 - Episode 5
+            {id: 28, quote: "You shouldn't have come looking.", character: "Bob Newby", season: 1, episode: 5, episodeTitle: "The Flea and the Acrobat", timestamp: "00:15"},
+            {id: 29, quote: "We have to find Will. We have to close the gate.", character: "Eleven", season: 1, episode: 5, episodeTitle: "The Flea and the Acrobat", timestamp: "00:28"},
+            {id: 30, quote: "The demogorgon. It's here. It's in the house.", character: "Bob Newby", season: 1, episode: 5, episodeTitle: "The Flea and the Acrobat", timestamp: "00:45"},
+            
+            // Season 1 - Episode 6
+            {id: 31, quote: "Barb, I'm sorry. I'm so sorry.", character: "Nancy Wheeler", season: 1, episode: 6, episodeTitle: "The Monster", timestamp: "00:08"},
+            {id: 32, quote: "If anyone asks, you're my sister. Okay? You're Eleven. I'm Mike.", character: "Mike Wheeler", season: 1, episode: 6, episodeTitle: "The Monster", timestamp: "00:22"},
+            {id: 33, quote: "I know you're scared. But you're not alone.", character: "Jim Hopper", season: 1, episode: 6, episodeTitle: "The Monster", timestamp: "00:35"},
+            {id: 34, quote: "You were born special. You were born to do something extraordinary.", character: "Dr. Martin Brenner", season: 1, episode: 6, episodeTitle: "The Monster", timestamp: "00:48"},
+            
+            // Season 1 - Episode 7
+            {id: 35, quote: "The demogorgon. It hunts. It takes what it wants.", character: "Will Byers", season: 1, episode: 7, episodeTitle: "The Bathtub", timestamp: "00:12"},
+            {id: 36, quote: "I can see it. The upside down. It's trying to tell us something.", character: "Will Byers", season: 1, episode: 7, episodeTitle: "The Bathtub", timestamp: "00:22"},
+            {id: 37, quote: "We're not going to die. Okay? We're not going to die.", character: "Mike Wheeler", season: 1, episode: 7, episodeTitle: "The Bathtub", timestamp: "00:38"},
+            
+            // Season 1 - Episode 8
+            {id: 38, quote: "Everything you've seen up until now... is going to change.", character: "Dr. Martin Brenner", season: 1, episode: 8, episodeTitle: "The Upside Down", timestamp: "00:38"},
+            {id: 39, quote: "We are not the monster here. You are.", character: "Eleven", season: 1, episode: 8, episodeTitle: "The Upside Down", timestamp: "00:52"},
+            {id: 40, quote: "There's no upside down.", character: "Bob Newby", season: 1, episode: 8, episodeTitle: "The Upside Down", timestamp: "00:52"},
+            {id: 41, quote: "Goodbye, Mike.", character: "Eleven", season: 1, episode: 8, episodeTitle: "The Upside Down", timestamp: "00:55"},
+            
+            // Season 2 - Episode 1
+            {id: 42, quote: "Eggos?", character: "Eleven", season: 2, episode: 1, episodeTitle: "MADMAX", timestamp: "00:05"},
+            {id: 43, quote: "We were just about to start the campaign.", character: "Mike Wheeler", season: 2, episode: 1, episodeTitle: "MADMAX", timestamp: "00:08"},
+            {id: 44, quote: "She was trying to protect us. That's what she does. That's what she always does.", character: "Mike Wheeler", season: 2, episode: 1, episodeTitle: "MADMAX", timestamp: "00:35"},
+            {id: 45, quote: "It only gets worse. The more you stranger things, the worse it gets.", character: "Bob Newby", season: 2, episode: 1, episodeTitle: "MADMAX", timestamp: "00:42"},
+            
+            // Season 2 - Episode 2
+            {id: 46, quote: "Trick or treat, freak.", character: "Troy", season: 2, episode: 2, episodeTitle: "Trick or Treat, Freak", timestamp: "00:02"},
+            {id: 47, quote: "It's a trap! It's a trap!", character: "Dustin Henderson", season: 2, episode: 2, episodeTitle: "Trick or Treat, Freak", timestamp: "00:42"},
+            {id: 48, quote: "You're a freak. You're a freak, and you don't have any friends!", character: "Mike Wheeler", season: 2, episode: 2, episodeTitle: "Trick or Treat, Freak", timestamp: "00:44"},
+            
+            // Season 2 - Episode 3
+            {id: 49, quote: "You ask me to jump, you ask me to die. But you never ask me to do anything else.", character: "Max Mayfield", season: 2, episode: 3, episodeTitle: "The Pollywog", timestamp: "00:45"},
+            {id: 50, quote: "Sticks and stones may break my bones, but words will never hurt me.", character: "Max Mayfield", season: 2, episode: 3, episodeTitle: "The Pollywog", timestamp: "00:31"},
+            {id: 51, quote: "I don't like lying to Mike. But I don't have a choice.", character: "Max Mayfield", season: 2, episode: 3, episodeTitle: "The Pollywog", timestamp: "00:38"},
+            {id: 52, quote: "Punk-ass middleschoolers.", character: "Bob Newby", season: 2, episode: 3, episodeTitle: "The Pollywog", timestamp: "00:25"},
+            
+            // Season 2 - Episode 4
+            {id: 53, quote: "I used to be a prime mover. Now I'm just a middle manager.", character: "Mayor Larry Kline", season: 2, episode: 4, episodeTitle: "Will the Wise", timestamp: "00:28"},
+            {id: 54, quote: "You want to find Will? You have to let me help.", character: "Bob Newby", season: 2, episode: 4, episodeTitle: "Will the Wise", timestamp: "00:35"},
+            {id: 55, quote: "He's not in the upside down anymore.", character: "Will Byers", season: 2, episode: 4, episodeTitle: "Will the Wise", timestamp: "00:48"},
+            
+            // Season 2 - Episode 5
+            {id: 56, quote: "The more you stranger things, the worse it gets.", character: "Bob Newby", season: 2, episode: 5, episodeTitle: "The Flip", timestamp: "00:32"},
+            {id: 57, quote: "He's gone. He's gone. He's gone.", character: "Will Byers", season: 2, episode: 5, episodeTitle: "The Flip", timestamp: "00:42"},
+            {id: 58, quote: "There's a lot of ugliness in this world. It's a beautiful day.", character: "Bob Newby", season: 2, episode: 5, episodeTitle: "The Flip", timestamp: "00:45"},
+            
+            // Season 2 - Episode 7
+            {id: 59, quote: "There's a lot of ugliness in this world. It's a beautiful day.", character: "Bob Newby", season: 2, episode: 7, episodeTitle: "The Lost Sister", timestamp: "00:18"},
+            {id: 60, quote: "You can be a princess. You can be a warrior.", character: "Bob Newby", season: 2, episode: 7, episodeTitle: "The Lost Sister", timestamp: "00:25"},
+            
+            // Season 2 - Episode 9
+            {id: 61, quote: "We are not the monster here. You are.", character: "Eleven", season: 2, episode: 9, episodeTitle: "The Gate", timestamp: "00:52"},
+            {id: 62, quote: "I'm not gonna hurt you. I swear I'm not gonna hurt you.", character: "Bob Newby", season: 2, episode: 9, episodeTitle: "The Gate", timestamp: "00:22"},
+            {id: 63, quote: "We did it. We closed the gate.", character: "Mike Wheeler", season: 2, episode: 9, episodeTitle: "The Gate", timestamp: "00:55"},
+            
+            // Season 3 - Episode 1
+            {id: 64, quote: "It's been one year since we saved the world.", character: "Mike Wheeler", season: 3, episode: 1, episodeTitle: "Suzie, Do You Copy?", timestamp: "00:02"},
+            {id: 65, quote: "Summer brings a lot of things. Sun, heat, but also... responsibilities.", character: "Chief Jim Hopper", season: 3, episode: 1, episodeTitle: "Suzie, Do You Copy?", timestamp: "00:05"},
+            {id: 66, quote: "There's a lot of weird stuff happening in this town. And I'm starting to think it's not random.", character: "Robin Buckley", season: 3, episode: 1, episodeTitle: "Suzie, Do You Copy?", timestamp: "00:22"},
+            
+            // Season 3 - Episode 2
+            {id: 67, quote: "You're going to die in a hole.", character: "Steve Harrington", season: 3, episode: 2, episodeTitle: "The Mall Rats", timestamp: "00:25"},
+            {id: 68, quote: "Harrington, you have got to be fricking kidding me.", character: "Dustin Henderson", season: 3, episode: 2, episodeTitle: "The Mall Rats", timestamp: "00:28"},
+            {id: 69, quote: "Suzie, do you copy?", character: "Dustin Henderson", season: 3, episode: 2, episodeTitle: "The Mall Rats", timestamp: "00:35"},
+            {id: 70, quote: "Code red. Code red. This is code red.", character: "Dustin Henderson", season: 3, episode: 2, episodeTitle: "The Mall Rats", timestamp: "00:45"},
+            
+            // Season 3 - Episode 3
+            {id: 71, quote: "You get sad, you eat. It's called stress baking.", character: "Robin Buckley", season: 3, episode: 3, episodeTitle: "The Case of the Missing Lifeguard", timestamp: "00:19"},
+            {id: 72, quote: "There's a whole other dimension. Upside down. And it's coming here.", character: "Max Mayfield", season: 3, episode: 3, episodeTitle: "The Case of the Missing Lifeguard", timestamp: "00:42"},
+            {id: 73, quote: "The Russian base. It's below the mall.", character: "Steve Harrington", season: 3, episode: 3, episodeTitle: "The Case of the Missing Lifeguard", timestamp: "00:52"},
+            
+            // Season 3 - Episode 4
+            {id: 74, quote: "I want to have his babies. He's a quarterback!", character: "Robin Buckley", season: 3, episode: 4, episodeTitle: "The Sauna Test", timestamp: "00:15"},
+            {id: 75, quote: "If anyone is looking for me, I'll be in the sauna.", character: "Steve Harrington", season: 3, episode: 4, episodeTitle: "The Sauna Test", timestamp: "00:08"},
+            {id: 76, quote: "We need to test. We need to find out if they're compromised.", character: "Alexei", season: 3, episode: 4, episodeTitle: "The Sauna Test", timestamp: "00:28"},
+            
+            // Season 3 - Episode 5
+            {id: 77, quote: "The morgues, the hospitals. They're not hiding anything.", character: "Robin Buckley", season: 3, episode: 5, episodeTitle: "The Flayed", timestamp: "00:12"},
+            {id: 78, quote: "We have to find the source. We have to close the gate.", character: "Eleven", season: 3, episode: 5, episodeTitle: "The Flayed", timestamp: "00:35"},
+            
+            // Season 3 - Episode 7
+            {id: 79, quote: "This is so Russian. This is like, bad movie Russian.", character: "Robin Buckley", season: 3, episode: 7, episodeTitle: "The Lost Sister", timestamp: "00:32"},
+            {id: 80, quote: "I can help you. I can find the key.", character: "Dustin Henderson", season: 3, episode: 7, episodeTitle: "The Lost Sister", timestamp: "00:45"},
+            
+            // Season 3 - Episode 8
+            {id: 81, quote: "Billy, no!", character: "Max Mayfield", season: 3, episode: 8, episodeTitle: "The Battle of Starcourt", timestamp: "00:58"},
+            {id: 82, quote: "The fireworks are actually gonna happen. Right here, right now.", character: "Chief Jim Hopper", season: 3, episode: 8, episodeTitle: "The Battle of Starcourt", timestamp: "01:02"},
+            {id: 83, quote: "It's hero time.", character: "Eleven", season: 3, episode: 8, episodeTitle: "The Battle of Starcourt", timestamp: "01:05"},
+            {id: 84, quote: "We never give up. That's what we do.", character: "Mike Wheeler", season: 3, episode: 8, episodeTitle: "The Battle of Starcourt", timestamp: "01:10"},
+            {id: 85, quote: "I love you.", character: "Eleven", season: 3, episode: 8, episodeTitle: "The Battle of Starcourt", timestamp: "01:12"},
+            {id: 86, quote: "I'm not gonna survive this.", character: "Billy Hargrove", season: 3, episode: 8, episodeTitle: "The Battle of Starcourt", timestamp: "01:08"},
+            
+            // Season 4 - Episode 1
+            {id: 87, quote: "This is the most powerful weapon against Vecna.", character: "Dr. Martin Brenner", season: 4, episode: 1, episodeTitle: "The Hellfire Club", timestamp: "00:45"},
+            {id: 88, quote: "You're the bravest person I know.", character: "Mike Wheeler", season: 4, episode: 1, episodeTitle: "The Hellfire Club", timestamp: "00:52"},
+            {id: 89, quote: "I need a hero. I'm literally asking for a hero.", character: "Mike Wheeler", season: 4, episode: 1, episodeTitle: "The Hellfire Club", timestamp: "00:35"},
+            {id: 90, quote: "It's not my fault you don't like girls.", character: "Eddie Munson", season: 4, episode: 1, episodeTitle: "The Hellfire Club", timestamp: "00:28"},
+            {id: 91, quote: "You're gonna kill him. You're gonna kill my friend.", character: "Max Mayfield", season: 4, episode: 1, episodeTitle: "The Hellfire Club", timestamp: "00:55"},
+            
+            // Season 4 - Episode 2
+            {id: 92, quote: "Your屁股 looks great, by the way.", character: "Argyle", season: 4, episode: 2, episodeTitle: "Vecna's Curse", timestamp: "00:18"},
+            {id: 93, quote: "We're not the heroes. We're just the dumbasses that got caught in the crossfire.", character: "Eddie Munson", season: 4, episode: 2, episodeTitle: "Vecna's Curse", timestamp: "00:42"},
+            {id: 94, quote: "Have you lost your damn mind?", character: "Jonathan Byers", season: 4, episode: 2, episodeTitle: "Vecna's Curse", timestamp: "00:25"},
+            
+            // Season 4 - Episode 3
+            {id: 95, quote: "There's a gate. A gate to another world.", character: "Will Byers", season: 4, episode: 3, episodeTitle: "The Monster and the Superhero", timestamp: "00:12"},
+            {id: 96, quote: "The key is in the water. The key is in the lake.", character: "Nancy Wheeler", season: 4, episode: 3, episodeTitle: "The Monster and the Superhero", timestamp: "00:35"},
+            
+            // Season 4 - Episode 4
+            {id: 97, quote: "Chrissy, wake up! Chrissy!", character: "Eddie Munson", season: 4, episode: 4, episodeTitle: "Dear Billy", timestamp: "00:22"},
+            {id: 98, quote: "You should have run. That's what you do. You run.", character: "Vecna", season: 4, episode: 4, episodeTitle: "Dear Billy", timestamp: "00:45"},
+            {id: 99, quote: "Nothing is impossible. You've just gotta want it bad enough.", character: "Eddie Munson", season: 4, episode: 4, episodeTitle: "Dear Billy", timestamp: "00:38"},
+            
+            // Season 4 - Episode 5
+            {id: 100, quote: "I think I know how to kill Vecna.", character: "Max Mayfield", season: 4, episode: 5, episodeTitle: "The J Frame", timestamp: "00:15"},
+            {id: 101, quote: "The music. It's the music that saves you.", character: "Eddie Munson", season: 4, episode: 5, episodeTitle: "The J Frame", timestamp: "00:28"},
+            
+            // Season 4 - Episode 6
+            {id: 102, quote: "I never thought I'd be the guy that people die around.", character: "Eddie Munson", season: 4, episode: 6, episodeTitle: "The Dive", timestamp: "00:48"},
+            {id: 103, quote: "They're all gonna die. We're all gonna die.", character: "Patrick McKinney", season: 4, episode: 6, episodeTitle: "The Dive", timestamp: "00:52"},
+            
+            // Season 4 - Episode 7
+            {id: 104, quote: "She taught me that surviving is the thing. That and a whole lot of pain.", character: "Max Mayfield", season: 4, episode: 7, episodeTitle: "The Massacre at Hawkins Lab", timestamp: "00:35"},
+            {id: 105, quote: "I know you're scared. But you are not alone.", character: "Eleven", season: 4, episode: 7, episodeTitle: "The Massacre at Hawkins Lab", timestamp: "00:45"},
+            {id: 106, quote: "You have to find me. Please. You have to find me.", character: "Max Mayfield", season: 4, episode: 7, episodeTitle: "The Massacre at Hawkins Lab", timestamp: "00:55"},
+            
+            // Season 4 - Episode 8
+            {id: 107, quote: "The red is coming. The red is coming for you.", character: "Victor Creel", season: 4, episode: 8, episodeTitle: "Papa", timestamp: "00:12"},
+            {id: 108, quote: "I'm your papa. I've always been your papa.", character: "Dr. Martin Brenner", season: 4, episode: 8, episodeTitle: "Papa", timestamp: "00:35"},
+            
+            // Season 4 - Episode 9
+            {id: 109, quote: "I'm gonna get that son of a bitch.", character: "Chief Jim Hopper", season: 4, episode: 9, episodeTitle: "The Piggyback", timestamp: "01:15"},
+            {id: 110, quote: "Welcome to the family.", character: "Vecna", season: 4, episode: 9, episodeTitle: "The Piggyback", timestamp: "01:20"},
+            {id: 111, quote: "I didn't run. I never run.", character: "Max Mayfield", season: 4, episode: 9, episodeTitle: "The Piggyback", timestamp: "01:25"},
+            {id: 112, quote: "Max! Max! Can you hear me?", character: "Lucas Sinclair", season: 4, episode: 9, episodeTitle: "The Piggyback", timestamp: "01:22"},
+            {id: 113, quote: "I got you. I got you.", character: "Lucas Sinclair", season: 4, episode: 9, episodeTitle: "The Piggyback", timestamp: "01:28"},
+            
+            // Season 5 - Episode 1
+            {id: 114, quote: "At long last, we can begin.", character: "Vecna", season: 5, episode: 1, episodeTitle: "The Crawl", timestamp: "00:02"},
+            {id: 115, quote: "You and I, we are going to do such beautiful things together, William. Such beautiful things.", character: "Vecna", season: 5, episode: 1, episodeTitle: "The Crawl", timestamp: "00:03"},
+            {id: 116, quote: "Should I stay or should I go now? If I go, there will be trouble. And if I stay, it will be double.", character: "Will Byers", season: 5, episode: 1, episodeTitle: "The Crawl", timestamp: "00:08"},
+            {id: 117, quote: "What is it about your presence that brings out their inner Neanderthal?", character: "Robin Buckley", season: 5, episode: 1, episodeTitle: "The Crawl", timestamp: "00:12"},
+            {id: 118, quote: "We don't stop looking. Even if it takes 100 more crawls, 1,000. We don't stop until we're sure that wrinkled, noseless, rotting bastard is dead and gone and never coming back.", character: "Mike Wheeler", season: 5, episode: 1, episodeTitle: "The Crawl", timestamp: "00:15"},
+            {id: 119, quote: "I want to see Vecna's heart on a platter. Just wish I could do it myself. For Eddie.", character: "Dustin Henderson", season: 5, episode: 1, episodeTitle: "The Crawl", timestamp: "00:18"},
+            {id: 120, quote: "I'm nuts. But I'm not that nuts.", character: "Chief Jim Hopper", season: 5, episode: 1, episodeTitle: "The Crawl", timestamp: "00:28"},
+            {id: 121, quote: "People are dying. Innocent people. I need the girl.", character: "Dr. Cavities", season: 5, episode: 1, episodeTitle: "The Crawl", timestamp: "00:35"},
+            {id: 122, quote: "I saw it. The Demagorgon. It's coming. It's coming for them.", character: "Will Byers", season: 5, episode: 1, episodeTitle: "The Crawl", timestamp: "00:42"},
+            
+            // Season 5 - Episode 2
+            {id: 123, quote: "This is war. This is all-out war.", character: "Jonathan Byers", season: 5, episode: 2, episodeTitle: "The Jeff", timestamp: "00:08"},
+            {id: 124, quote: "We are all connected. Every one of us.", character: "Eleven", season: 5, episode: 2, episodeTitle: "The Jeff", timestamp: "00:35"},
+            {id: 125, quote: "The upside down isn't just a place anymore. It's a state of mind.", character: "Will Byers", season: 5, episode: 2, episodeTitle: "The Jeff", timestamp: "00:45"},
+            
+            // Season 5 - Episode 3
+            {id: 126, quote: "Hawkins is our home. We fight for it.", character: "Steve Harrington", season: 5, episode: 3, episodeTitle: "The Vanishing of", timestamp: "00:22"},
+            {id: 127, quote: "The battle isn't over. It's just beginning.", character: "Will Byers", season: 5, episode: 3, episodeTitle: "The Vanishing of", timestamp: "00:45"},
+            {id: 128, quote: "We can't run anymore. We have to fight.", character: "Nancy Wheeler", season: 5, episode: 3, episodeTitle: "The Vanishing of", timestamp: "00:52"},
+            
+            // Season 5 - Episode 4
+            {id: 129, quote: "Together, we can close the gate forever.", character: "Eleven", season: 5, episode: 4, episodeTitle: "The Testament", timestamp: "00:55"},
+            {id: 130, quote: "The upside down is a part of us now.", character: "Nancy Wheeler", season: 5, episode: 4, episodeTitle: "The Testament", timestamp: "01:02"},
+            {id: 131, quote: "We are not alone. We have each other.", character: "Mike Wheeler", season: 5, episode: 4, episodeTitle: "The Testament", timestamp: "01:08"},
+            
+            // Season 5 - Episode 5
+            {id: 132, quote: "This is for Eddie.", character: "Dustin Henderson", season: 5, episode: 5, episodeTitle: "The Miracle", timestamp: "00:08"},
+            {id: 133, quote: "I've never been more scared in my life.", character: "Jonathan Byers", season: 5, episode: 5, episodeTitle: "The Miracle", timestamp: "00:25"},
+            {id: 134, quote: "We can't leave them. We can't.", character: "Robin Buckley", season: 5, episode: 5, episodeTitle: "The Miracle", timestamp: "00:38"},
+            
+            // Season 5 - Episode 6
+            {id: 135, quote: "Don't make me go back there.", character: "Max Mayfield", season: 5, episode: 6, episodeTitle: "The Escape", timestamp: "00:18"},
+            {id: 136, quote: "We are the only ones who can stop this.", character: "Robin Buckley", season: 5, episode: 6, episodeTitle: "The Escape", timestamp: "00:42"},
+            {id: 137, quote: "The world is ending. Again.", character: "Argyle", season: 5, episode: 6, episodeTitle: "The Escape", timestamp: "00:08"},
+            
+            // Season 5 - Episode 7
+            {id: 138, quote: "This ends now. All of it.", character: "Chief Jim Hopper", season: 5, episode: 7, episodeTitle: "The Return", timestamp: "00:52"},
+            {id: 139, quote: "I'm not leaving you. Not again.", character: "Mike Wheeler", season: 5, episode: 7, episodeTitle: "The Return", timestamp: "01:05"},
+            {id: 140, quote: "We did it. We actually did it.", character: "Max Mayfield", season: 5, episode: 7, episodeTitle: "The Return", timestamp: "01:12"},
+            
+            // Season 5 - Episode 8/9 - Final Episodes
+            {id: 141, quote: "Goodbye, my love.", character: "Joyce Byers", season: 5, episode: 8, episodeTitle: "The End", timestamp: "01:12"},
+            {id: 142, quote: "We survived. We finally made it.", character: "Dustin Henderson", season: 5, episode: 8, episodeTitle: "The End", timestamp: "01:25"},
+            {id: 143, quote: "This is the best day of my life.", character: "Will Byers", season: 5, episode: 8, episodeTitle: "The End", timestamp: "01:28"},
+            {id: 144, quote: "I love you guys. I love you so much.", character: "Mike Wheeler", season: 5, episode: 8, episodeTitle: "The End", timestamp: "01:30"},
+            {id: 145, quote: "We're going to be okay. We're going to be okay.", character: "Eleven", season: 5, episode: 9, episodeTitle: "The Edge", timestamp: "01:35"},
+            {id: 146, quote: "The nightmare is over.", character: "Chief Jim Hopper", season: 5, episode: 9, episodeTitle: "The Edge", timestamp: "01:42"},
+            {id: 147, quote: "Let's go home.", character: "Steve Harrington", season: 5, episode: 9, episodeTitle: "The Edge", timestamp: "01:45"},
+            {id: 148, quote: "It was never supposed to end like this.", character: "Vecna", season: 5, episode: 9, episodeTitle: "The Edge", timestamp: "01:38"},
+            {id: 149, quote: "We are the ones who lived. We are the ones who survived.", character: "Will Byers", season: 5, episode: 9, episodeTitle: "The Edge", timestamp: "01:48"},
+            {id: 150, quote: "Thank you. For everything.", character: "Max Mayfield", season: 5, episode: 9, episodeTitle: "The Edge", timestamp: "01:50"},
+            
+            // Additional famous lines from all seasons
+            {id: 151, quote: "She punched me! She punched me in the face!", character: "Troy", season: 1, episode: 2, episodeTitle: "The Weirdo on Maple Street", timestamp: "00:15"},
+            {id: 152, quote: "Why is this happening to me?", character: "Will Byers", season: 1, episode: 4, episodeTitle: "The Body", timestamp: "00:25"},
+            {id: 153, quote: "This is not happening. This is not happening.", character: "Nancy Wheeler", season: 1, episode: 6, episodeTitle: "The Monster", timestamp: "00:32"},
+            {id: 154, quote: "There's something wrong with our son.", character: "Lonnie Byers", season: 2, episode: 1, episodeTitle: "MADMAX", timestamp: "00:18"},
+            {id: 155, quote: "Everything is connected.", character: "Will Byers", season: 2, episode: 3, episodeTitle: "The Pollywog", timestamp: "00:45"},
+            {id: 156, quote: "I'm the sheriff. I make the rules.", character: "Chief Jim Hopper", season: 2, episode: 5, episodeTitle: "The Flip", timestamp: "00:28"},
+            {id: 157, quote: "The past is the past. It's gone.", character: "Bob Newby", season: 2, episode: 6, episodeTitle: "The Spy", timestamp: "00:15"},
+            {id: 158, quote: "You think I'm scared of you? I'm not scared of you.", character: "Max Mayfield", season: 2, episode: 4, episodeTitle: "Will the Wise", timestamp: "00:32"},
+            {id: 159, quote: "We're not like them. We're not normal.", character: "Eleven", season: 2, episode: 8, episodeTitle: "The Lost Brother", timestamp: "00:22"},
+            {id: 160, quote: "I don't want to be your lab rat anymore.", character: "Eleven", season: 2, episode: 7, episodeTitle: "The Lost Sister", timestamp: "00:35"},
+            
+            // More Season 3
+            {id: 161, quote: "This is the summer of love. Bitch.", character: "Robin Buckley", season: 3, episode: 1, episodeTitle: "Suzie, Do You Copy?", timestamp: "00:15"},
+            {id: 162, quote: "You are such a liar.", character: "Dustin Henderson", season: 3, episode: 1, episodeTitle: "Suzie, Do You Copy?", timestamp: "00:22"},
+            {id: 163, quote: "It's always the quiet ones.", character: "Steve Harrington", season: 3, episode: 3, episodeTitle: "The Case of the Missing Lifeguard", timestamp: "00:28"},
+            {id: 164, quote: "That's not a razor. That's a weapon.", character: "Chief Jim Hopper", season: 3, episode: 4, episodeTitle: "The Sauna Test", timestamp: "00:12"},
+            {id: 165, quote: "I don't trust adults. Especially not the government.", character: "Dustin Henderson", season: 3, episode: 5, episodeTitle: "The Flayed", timestamp: "00:18"},
+            {id: 166, quote: "You have to get out of here. Now.", character: "Billy Hargrove", season: 3, episode: 6, episodeTitle: "Slaughterhouse", timestamp: "00:45"},
+            {id: 167, quote: "We're gonna need a bigger boat.", character: "Steve Harrington", season: 3, episode: 7, episodeTitle: "The Lost Sister", timestamp: "00:52"},
+            {id: 168, quote: "Don't you dare! Don't you dare!", character: "Karen Wheeler", season: 3, episode: 8, episodeTitle: "The Battle of Starcourt", timestamp: "00:48"},
+            
+            // More Season 4
+            {id: 169, quote: "Hellfire is cancelled.", character: "Jason Carver", season: 4, episode: 1, episodeTitle: "The Hellfire Club", timestamp: "00:35"},
+            {id: 170, quote: "Freak. Freak. Freak.", character: "Jason Carver", season: 4, episode: 1, episodeTitle: "The Hellfire Club", timestamp: "00:42"},
+            {id: 171, quote: "You don't mess with our party.", character: "Mike Wheeler", season: 4, episode: 1, episodeTitle: "The Hellfire Club", timestamp: "00:48"},
+            {id: 172, quote: "You know what happens when you try to outsmart us?", character: "Eddie Munson", season: 4, episode: 2, episodeTitle: "Vecna's Curse", timestamp: "00:35"},
+            {id: 173, quote: "You don't get to talk to me like that.", character: "Jonathan Byers", season: 4, episode: 2, episodeTitle: "Vecna's Curse", timestamp: "00:42"},
+            {id: 174, quote: "The curse is spreading.", character: "Henry Creel", season: 4, episode: 4, episodeTitle: "Dear Billy", timestamp: "00:55"},
+            {id: 175, quote: "Time to fly.", character: "Eddie Munson", season: 4, episode: 4, episodeTitle: "Dear Billy", timestamp: "00:58"},
+            {id: 176, quote: "You can't spell America without Erica.", character: "Erica Sinclair", season: 4, episode: 5, episodeTitle: "The J Frame", timestamp: "00:08"},
+            {id: 177, quote: "Get the hell out of my house.", character: "Victor Creel", season: 4, episode: 8, episodeTitle: "Papa", timestamp: "00:25"},
+            {id: 178, quote: "She's not dead. She's not dead yet.", character: "Lucas Sinclair", season: 4, episode: 9, episodeTitle: "The Piggyback", timestamp: "01:30"},
+            
+            // More Season 5
+            {id: 179, quote: "The world is changing. We have to change with it.", character: "Jonathan Byers", season: 5, episode: 1, episodeTitle: "The Crawl", timestamp: "00:45"},
+            {id: 180, quote: "I remember everything. Everything.", character: "Will Byers", season: 5, episode: 2, episodeTitle: "The Jeff", timestamp: "00:52"},
+            {id: 181, quote: "We are Hawkins. We don't give up.", character: "Nancy Wheeler", season: 5, episode: 3, episodeTitle: "The Vanishing of", timestamp: "00:58"},
+            {id: 182, quote: "The storm is coming.", character: "Vecna", season: 5, episode: 4, episodeTitle: "The Testament", timestamp: "01:12"},
+            {id: 183, quote: "We are the resistance.", character: "Robin Buckley", season: 5, episode: 5, episodeTitle: "The Miracle", timestamp: "00:45"},
+            {id: 184, quote: "This is it. This is the final battle.", character: "Chief Jim Hopper", season: 5, episode: 6, episodeTitle: "The Escape", timestamp: "00:55"},
+            {id: 185, quote: "No more running. No more hiding.", character: "Eleven", season: 5, episode: 7, episodeTitle: "The Return", timestamp: "01:15"},
+            {id: 186, quote: "I will find you. No matter what.", character: "Mike Wheeler", season: 5, episode: 7, episodeTitle: "The Return", timestamp: "01:22"},
+            {id: 187, quote: "This is the end. Or is it a new beginning?", character: "Will Byers", season: 5, episode: 8, episodeTitle: "The End", timestamp: "01:35"},
+            {id: 188, quote: "We did it. We saved the world.", character: "Dustin Henderson", season: 5, episode: 9, episodeTitle: "The Edge", timestamp: "01:52"},
+            {id: 189, quote: "The story isn't over. It never is.", character: "Narrator", season: 5, episode: 9, episodeTitle: "The Edge", timestamp: "01:55"},
+            {id: 190, quote: "Together, we are stronger.", character: "Max Mayfield", season: 5, episode: 9, episodeTitle: "The Edge", timestamp: "01:58"}
         ];
 
-        let currentAudio = null;
-        let currentBtn = null;
         let currentFilter = 'all';
         let searchQuery = '';
+        const RESULTS_PER_PAGE = 30;
+        let displayedResults = 0;
 
         const searchInput = document.getElementById('searchInput');
         const resultsContainer = document.getElementById('resultsContainer');
         const resultsInfo = document.getElementById('resultsInfo');
         const filterTabs = document.querySelectorAll('.filter-tab');
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        const loadMoreDiv = document.getElementById('loadMore');
 
         function escapeHtml(text) {
             const div = document.createElement('div');
@@ -475,7 +655,7 @@
         function highlightMatch(text, query) {
             if (!query) return escapeHtml(text);
             const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-            return escapeHtml(text).replace(regex, '<mark style="background: rgba(34, 146, 232, 0.3); color: inherit; padding: 0 2px; border-radius: 2px;">$1</mark>');
+            return escapeHtml(text).replace(regex, '<mark>$1</mark>');
         }
 
         function filterQuotes() {
@@ -497,45 +677,59 @@
             return filtered;
         }
 
-        function renderResults(results, query) {
-            if (results.length === 0) {
-                resultsContainer.innerHTML = `
-                    <div class="empty-state">
-                        <div class="icon">🔍</div>
-                        <h3>No quotes found</h3>
-                        <p>Try different keywords or select a different season</p>
-                    </div>
-                `;
-                resultsInfo.classList.add('hidden');
-                return;
+        function renderResults(results, query, append = false) {
+            if (!append) {
+                displayedResults = 0;
+                if (results.length === 0) {
+                    resultsContainer.innerHTML = `
+                        <div class="empty-state">
+                            <div class="icon">🔍</div>
+                            <h3>No quotes found</h3>
+                            <p>Try different keywords or select a different season</p>
+                        </div>
+                    `;
+                    resultsInfo.classList.add('hidden');
+                    loadMoreDiv.classList.add('hidden');
+                    return;
+                }
+
+                const filterText = currentFilter === 'all' ? '' : ` Season ${currentFilter}`;
+                resultsInfo.textContent = `${results.length} results found${filterText}`;
+                resultsInfo.classList.remove('hidden');
             }
 
-            const filterText = currentFilter === 'all' ? '' : ` Season ${currentFilter}`;
-            resultsInfo.textContent = `${results.length} result${results.length !== 1 ? 's' : ''} found${filterText}`;
-            resultsInfo.classList.remove('hidden');
-
-            resultsContainer.innerHTML = results.map(q => `
+            const toShow = results.slice(displayedResults, displayedResults + RESULTS_PER_PAGE);
+            
+            const html = toShow.map(q => `
                 <div class="quote-card" data-id="${q.id}">
-                    <div class="quote-image">
-                        <img src="${q.image}" alt="${q.character}" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'quote-image-placeholder\\'>🎬</div>';">
-                        <span class="season-badge season-${q.season}">Season ${q.season}</span>
+                    <div class="quote-header">
+                        <span class="character-name">${highlightMatch(q.character, query)}</span>
+                        <span class="episode-info">S${q.season} E${q.episode} • ${highlightMatch(q.episodeTitle, query)}</span>
                     </div>
-                    <div class="quote-content">
-                        <div class="quote-header">
-                            <span class="character-name">${highlightMatch(q.character, query)}</span>
-                            <span class="episode-info">S${q.season} E${q.episode} • ${highlightMatch(q.episodeTitle, query)}</span>
-                        </div>
-                        <p class="quote-text">${highlightMatch(q.quote, query)}</p>
-                        <div class="quote-footer">
-                            <span class="timestamp">⏱ ${q.timestamp}</span>
-                            <button class="audio-btn" data-audio="#" data-id="${q.id}">
-                                <span class="icon">🔊</span>
-                                <span class="text">Listen to Original Audio</span>
-                            </button>
-                        </div>
+                    <p class="quote-text">${highlightMatch(q.quote, query)}</p>
+                    <div class="quote-footer">
+                        <span class="timestamp">⏱ ${q.timestamp}</span>
+                        <button class="audio-btn" data-id="${q.id}">
+                            <span>🔊</span>
+                            <span>Listen</span>
+                        </button>
                     </div>
                 </div>
             `).join('');
+
+            if (append) {
+                resultsContainer.insertAdjacentHTML('beforeend', html);
+            } else {
+                resultsContainer.innerHTML = html;
+            }
+
+            displayedResults += toShow.length;
+
+            if (displayedResults < results.length) {
+                loadMoreDiv.classList.remove('hidden');
+            } else {
+                loadMoreDiv.classList.add('hidden');
+            }
 
             document.querySelectorAll('.audio-btn').forEach(btn => {
                 btn.addEventListener('click', handleAudioPlay);
@@ -544,26 +738,20 @@
 
         function handleAudioPlay(e) {
             const btn = e.currentTarget;
-            const btnText = btn.querySelector('.text');
+            const span = btn.querySelector('span:last-child');
             
-            // Demo - show notification
-            if (btnText.textContent === 'Audio unavailable') {
-                btnText.textContent = 'Listen to Original Audio';
-                return;
-            }
-            
-            btnText.textContent = 'Demo - Audio coming soon';
             btn.classList.add('playing');
+            span.textContent = 'Playing...';
             
             setTimeout(() => {
                 btn.classList.remove('playing');
-                btnText.textContent = 'Listen to Original Audio';
+                span.textContent = 'Listen';
             }, 2000);
         }
 
-        function updateResults() {
+        function updateResults(append = false) {
             const results = filterQuotes();
-            renderResults(results, searchQuery);
+            renderResults(results, searchQuery, append);
         }
 
         let debounceTimer;
@@ -571,7 +759,7 @@
             clearTimeout(debounceTimer);
             debounceTimer = setTimeout(() => {
                 searchQuery = e.target.value;
-                updateResults();
+                updateResults(false);
             }, 150);
         });
 
@@ -580,20 +768,25 @@
                 filterTabs.forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
                 currentFilter = tab.dataset.season;
-                updateResults();
+                updateResults(false);
             });
+        });
+
+        loadMoreBtn.addEventListener('click', () => {
+            const results = filterQuotes();
+            renderResults(results, searchQuery, true);
         });
 
         searchInput.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 searchInput.value = '';
                 searchQuery = '';
-                updateResults();
+                updateResults(false);
             }
         });
 
         // Initial render
-        updateResults();
+        updateResults(false);
     </script>
 </body>
 </html>
