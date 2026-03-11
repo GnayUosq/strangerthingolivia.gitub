@@ -19,6 +19,7 @@
             --accent-red: #e50914;
             --accent-red-hover: #f40612;
             --accent-blue: #2292e8;
+            --accent-purple: #8b5cf6;
             --text-primary: #ffffff;
             --text-secondary: #a3a3a3;
             --border-color: #2a2a2a;
@@ -35,7 +36,7 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 40px 20px;
         }
@@ -99,6 +100,35 @@
             font-size: 1.2rem;
         }
 
+        .filter-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 8px 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-tab:hover {
+            border-color: var(--accent-blue);
+            color: var(--text-primary);
+        }
+
+        .filter-tab.active {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: white;
+        }
+
         .results-info {
             color: var(--text-secondary);
             margin-bottom: 20px;
@@ -108,9 +138,9 @@
         .quote-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 16px;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 20px;
             transition: all 0.3s ease;
         }
 
@@ -118,6 +148,50 @@
             background: var(--bg-card-hover);
             border-color: var(--accent-blue);
             transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .quote-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .quote-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .quote-image-placeholder {
+            font-size: 4rem;
+            opacity: 0.3;
+        }
+
+        .season-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .season-1 { background: #22c55e; color: #000; }
+        .season-2 { background: #3b82f6; color: #fff; }
+        .season-3 { background: #f59e0b; color: #000; }
+        .season-4 { background: #8b5cf6; color: #fff; }
+        .season-5 { background: #ef4444; color: #fff; }
+
+        .quote-content {
+            padding: 24px;
         }
 
         .quote-header {
@@ -142,8 +216,8 @@
         }
 
         .quote-text {
-            font-size: 1.2rem;
-            line-height: 1.6;
+            font-size: 1.15rem;
+            line-height: 1.7;
             margin-bottom: 20px;
             font-style: italic;
             color: var(--text-primary);
@@ -155,10 +229,23 @@
             content: '"';
             position: absolute;
             left: 0;
-            top: -5px;
-            font-size: 2rem;
+            top: -8px;
+            font-size: 2.2rem;
             color: var(--accent-red);
             font-style: normal;
+        }
+
+        .quote-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .timestamp {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
         }
 
         .audio-btn {
@@ -182,17 +269,13 @@
         }
 
         .audio-btn.playing {
-            background: var(--accent-blue);
+            background: var(--accent-purple);
             animation: pulse 1.5s infinite;
         }
 
-        .audio-btn .icon {
-            font-size: 1.1rem;
-        }
-
         @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(34, 146, 232, 0.4); }
-            50% { box-shadow: 0 0 0 10px rgba(34, 146, 232, 0); }
+            0%, 100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(139, 92, 246, 0); }
         }
 
         .empty-state {
@@ -213,12 +296,6 @@
             margin-bottom: 10px;
         }
 
-        .loading {
-            text-align: center;
-            padding: 40px;
-            color: var(--text-secondary);
-        }
-
         .hidden {
             display: none !important;
         }
@@ -231,6 +308,29 @@
             color: var(--text-secondary);
             font-size: 0.85rem;
         }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
     </style>
 </head>
 <body>
@@ -240,135 +340,131 @@
             <p class="subtitle">Quote Search + Original Audio</p>
         </div>
 
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Seasons</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">34</div>
+                <div class="stat-label">Episodes</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100+</div>
+                <div class="stat-label">Quotes</div>
+            </div>
+        </div>
+
         <div class="search-container">
             <span class="search-icon">🔍</span>
             <input 
                 type="text" 
                 class="search-input" 
                 id="searchInput" 
-                placeholder="Search quotes... (e.g., 'friends don't lie')"
+                placeholder="Search quotes... (e.g., 'friends don't lie', 'coffee')"
                 autocomplete="off"
             >
+        </div>
+
+        <div class="filter-tabs">
+            <button class="filter-tab active" data-season="all">All Seasons</button>
+            <button class="filter-tab season-1" data-season="1">Season 1</button>
+            <button class="filter-tab season-2" data-season="2">Season 2</button>
+            <button class="filter-tab season-3" data-season="3">Season 3</button>
+            <button class="filter-tab season-4" data-season="4">Season 4</button>
+            <button class="filter-tab season-5" data-season="5">Season 5</button>
         </div>
 
         <div id="resultsInfo" class="results-info hidden"></div>
         <div id="resultsContainer"></div>
 
         <div class="footer">
-            Stranger Things Quote Search Demo
+            Stranger Things Quote Search Demo - Images are placeholders
         </div>
     </div>
 
     <script>
         const quotes = [
-            {
-                id: 1,
-                quote: "Friends don't lie.",
-                character: "Eleven",
-                season: 1,
-                episode: 3,
-                episodeTitle: "Holly, Jolly",
-                timestamp: "03:24",
-                audioUrl: "https://www.soundjay.com/human/sounds/friends-dont-lie-01.mp3"
-            },
-            {
-                id: 2,
-                quote: "She's our friend and she's crazy.",
-                character: "Dustin",
-                season: 1,
-                episode: 2,
-                episodeTitle: "The Weirdo on Maple Street",
-                timestamp: "28:15",
-                audioUrl: "https://www.soundjay.com/human/sounds/crazy-friend-01.mp3"
-            },
-            {
-                id: 3,
-                quote: "Mornings are for coffee and contemplation.",
-                character: "Chief Hopper",
-                season: 1,
-                episode: 1,
-                episodeTitle: "The Vanishing of Will Byers",
-                timestamp: "05:30",
-                audioUrl: "https://www.soundjay.com/human/sounds/coffee-01.mp3"
-            },
-            {
-                id: 4,
-                quote: "Everything you've seen up until now... is going to change.",
-                character: "Dr. Brenner",
-                season: 1,
-                episode: 8,
-                episodeTitle: "The Upside Down",
-                timestamp: "38:42",
-                audioUrl: "https://www.soundjay.com/human/sounds/change-01.mp3"
-            },
-            {
-                id: 5,
-                quote: "I'm not gonna hurt you. I swear I'm not gonna hurt you.",
-                character: "Bob Newby",
-                season: 3,
-                episode: 7,
-                episodeTitle: "The Lost Sister",
-                timestamp: "22:18",
-                audioUrl: "https://www.soundjay.com/human/sounds/not-hurt-01.mp3"
-            },
-            {
-                id: 6,
-                quote: "The more you stranger things, the worse it gets.",
-                character: "Bob Newby",
-                season: 3,
-                episode: 5,
-                episodeTitle: "The Flayed",
-                timestamp: "45:02",
-                audioUrl: "https://www.soundjay.com/human/sounds/stranger-things-01.mp3"
-            },
-            {
-                id: 7,
-                quote: "We are not the monster here. You are.",
-                character: "Eleven",
-                season: 2,
-                episode: 9,
-                episodeTitle: "The Gate",
-                timestamp: "52:17",
-                audioUrl: "https://www.soundjay.com/human/sounds/monster-01.mp3"
-            },
-            {
-                id: 8,
-                quote: "You get sad, you eat. It's called stress baking.",
-                character: "Robin Buckley",
-                season: 3,
-                episode: 3,
-                episodeTitle: "The Case of the Missing Lifeguard",
-                timestamp: "19:45",
-                audioUrl: "https://www.soundjay.com/human/sounds/baking-01.mp3"
-            },
-            {
-                id: 9,
-                quote: "Sticks and stones may break my bones, but words will never hurt me.",
-                character: "Max",
-                season: 2,
-                episode: 3,
-                episodeTitle: "The Pollywog",
-                timestamp: "31:22",
-                audioUrl: "https://www.soundjay.com/human/sounds/sticks-stones-01.mp3"
-            },
-            {
-                id: 10,
-                quote: "We are all pretty bizarre. Some of us are just better at hiding it.",
-                character: "Andrew",
-                season: 1,
-                episode: 2,
-                episodeTitle: "The Weirdo on Maple Street",
-                timestamp: "42:08",
-                audioUrl: "https://www.soundjay.com/human/sounds/bizarre-01.mp3"
-            }
+            // Season 1
+            { id: 1, quote: "Friends don't lie.", character: "Eleven", season: 1, episode: 3, episodeTitle: "Holly, Jolly", timestamp: "03:24", image: "https://picsum.photos/seed/st1e3/800/400" },
+            { id: 2, quote: "She's our friend and she's crazy.", character: "Dustin", season: 1, episode: 2, episodeTitle: "The Weirdo on Maple Street", timestamp: "28:15", image: "https://picsum.photos/seed/st1e2/800/400" },
+            { id: 3, quote: "Mornings are for coffee and contemplation.", character: "Chief Hopper", season: 1, episode: 1, episodeTitle: "The Vanishing of Will Byers", timestamp: "05:30", image: "https://picsum.photos/seed/st1e1/800/400" },
+            { id: 4, quote: "Something's coming. Something hungry for blood.", character: "Mike", season: 1, episode: 1, episodeTitle: "The Vanishing of Will Byers", timestamp: "01:15", image: "https://picsum.photos/seed/st1e1b/800/400" },
+            { id: 5, quote: "The demogorgon got me. See you tomorrow!", character: "Will", season: 1, episode: 1, episodeTitle: "The Vanishing of Will Byers", timestamp: "02:30", image: "https://picsum.photos/seed/st1e1c/800/400" },
+            { id: 6, quote: "We found a girl. She's our friend and she's crazy. Like, super crazy.", character: "Dustin", season: 1, episode: 2, episodeTitle: "The Weirdo on Maple Street", timestamp: "35:00", image: "https://picsum.photos/seed/st1e2b/800/400" },
+            { id: 7, quote: "I'm not crazy. I know what I saw.", character: "Will", season: 1, episode: 4, episodeTitle: "The Body", timestamp: "12:45", image: "https://picsum.photos/seed/st1e4/800/400" },
+            { id: 8, quote: "Everything you've seen up until now is going to change.", character: "Dr. Brenner", season: 1, episode: 8, episodeTitle: "The Upside Down", timestamp: "38:42", image: "https://picsum.photos/seed/st1e8/800/400" },
+            { id: 9, quote: "The shadow is coming. They're all going to die.", character: "Eleven", season: 1, episode: 8, episodeTitle: "The Upside Down", timestamp: "45:00", image: "https://picsum.photos/seed/st1e8b/800/400" },
+            { id: 10, quote: "There's no upside down.", character: "Bob Newby", season: 1, episode: 8, episodeTitle: "The Upside Down", timestamp: "52:10", image: "https://picsum.photos/seed/st1e8c/800/400" },
+
+            // Season 2
+            { id: 11, quote: "We are not the monster here. You are.", character: "Eleven", season: 2, episode: 9, episodeTitle: "The Gate", timestamp: "52:17", image: "https://picsum.photos/seed/st2e9/800/400" },
+            { id: 12, quote: "The more you stranger things, the worse it gets.", character: "Bob Newby", season: 2, episode: 5, episodeTitle: "The Flip", timestamp: "32:45", image: "https://picsum.photos/seed/st2e5/800/400" },
+            { id: 13, quote: "Punk-ass middleschoolers.", character: "Bob Newby", season: 2, episode: 3, episodeTitle: "The Pollywog", timestamp: "25:30", image: "https://picsum.photos/seed/st2e3/800/400" },
+            { id: 14, quote: "There's a lot of ugliness in this world. It's a beautiful day.", character: "Bob Newby", season: 2, episode: 7, episodeTitle: "The Lost Sister", timestamp: "18:20", image: "https://picsum.photos/seed/st2e7/800/400" },
+            { id: 15, quote: "I used to be a prime mover. Now I'm just a middle manager.", character: "Mayor Larry Kline", season: 2, episode: 4, episodeTitle: "Will the Wise", timestamp: "28:15", image: "https://picsum.photos/seed/st2e4/800/400" },
+            { id: 16, quote: "It's a trap! It's a trap!", character: "Dustin", season: 2, episode: 2, episodeTitle: "Trick or Treat, Freak", timestamp: "42:00", image: "https://picsum.photos/seed/st2e2/800/400" },
+            { id: 17, quote: "Eggos?", character: "Eleven", season: 2, episode: 1, episodeTitle: "MADMAX", timestamp: "05:20", image: "https://picsum.photos/seed/st2e1/800/400" },
+            { id: 18, quote: "You ask me to jump, you ask me to die. But you never ask me to do anything else.", character: "Max", season: 2, episode: 3, episodeTitle: "The Pollywog", timestamp: "45:30", image: "https://picsum.photos/seed/st2e3b/800/400" },
+            { id: 19, quote: "Sticks and stones may break my bones, but words will never hurt me.", character: "Max", season: 2, episode: 3, episodeTitle: "The Pollywog", timestamp: "31:22", image: "https://picsum.photos/seed/st2e3c/800/400" },
+            { id: 20, quote: "We are all pretty bizarre. Some of us are just better at hiding it.", character: "Andrew", season: 2, episode: 2, episodeTitle: "Trick or Treat, Freak", timestamp: "42:08", image: "https://picsum.photos/seed/st2e2b/800/400" },
+
+            // Season 3
+            { id: 21, quote: "You get sad, you eat. It's called stress baking.", character: "Robin Buckley", season: 3, episode: 3, episodeTitle: "The Case of the Missing Lifeguard", timestamp: "19:45", image: "https://picsum.photos/seed/st3e3/800/400" },
+            { id: 22, quote: "I want to have his babies. He's a quarterback!", character: "Robin Buckley", season: 3, episode: 4, episodeTitle: "The Sauna Test", timestamp: "15:30", image: "https://picsum.photos/seed/st3e4/800/400" },
+            { id: 23, quote: "You're going to die in a hole.", character: "Steve Harrington", season: 3, episode: 2, episodeTitle: "Suzie, Do You Copy?", timestamp: "25:15", image: "https://picsum.photos/seed/st3e2/800/400" },
+            { id: 24, quote: "Harrington, you have got to be fricking kidding me.", character: "Dustin", season: 3, episode: 2, episodeTitle: "Suzie, Do You Copy?", timestamp: "28:40", image: "https://picsum.photos/seed/st3e2b/800/400" },
+            { id: 25, quote: "Oh, this is so Russian. This is like, bad movie Russian.", character: "Robin Buckley", season: 3, episode: 7, episodeTitle: "The Lost Sister", timestamp: "32:20", image: "https://picsum.photos/seed/st3e7/800/400" },
+            { id: 26, quote: "Billy, no!", character: "Max", season: 3, episode: 8, episodeTitle: "The Battle of Starcourt", timestamp: "58:30", image: "https://picsum.photos/seed/st3e8/800/400" },
+            { id: 27, quote: "The fireworks are actually gonna happen. Right here, right now.", character: "Hopper", season: 3, episode: 8, episodeTitle: "The Battle of Starcourt", timestamp: "62:15", image: "https://picsum.photos/seed/st3e8b/800/400" },
+            { id: 28, quote: "It's hero time.", character: "Eleven", season: 3, episode: 8, episodeTitle: "The Battle of Starcourt", timestamp: "65:00", image: "https://picsum.photos/seed/st3e8c/800/400" },
+            { id: 29, quote: "We never give up. That's what we do.", character: "Mike Wheeler", season: 3, episode: 8, episodeTitle: "The Battle of Starcourt", timestamp: "70:20", image: "https://picsum.photos/seed/st3e8d/800/400" },
+            { id: 30, quote: "If anyone is looking for me, I'll be in the sauna.", character: "Steve Harrington", season: 3, episode: 4, episodeTitle: "The Sauna Test", timestamp: "08:45", image: "https://picsum.photos/seed/st3e4b/800/400" },
+
+            // Season 4
+            { id: 31, quote: "This is the most powerful weapon against Vecna.", character: "Dr. Brenner", season: 4, episode: 1, episodeTitle: "The Hellfire Club", timestamp: "45:20", image: "https://picsum.photos/seed/st4e1/800/400" },
+            { id: 32, quote: "You're the bravest person I know.", character: "Mike Wheeler", season: 4, episode: 1, episodeTitle: "The Hellfire Club", timestamp: "52:15", image: "https://picsum.photos/seed/st4e1b/800/400" },
+            { id: 33, quote: "Your屁股 looks great, by the way.", character: "Argyle", season: 4, episode: 2, episodeTitle: "Vecna's Curse", timestamp: "18:30", image: "https://picsum.photos/seed/st4e2/800/400" },
+            { id: 34, quote: "She taught me that surviving is the thing. That and a whole lot of pain.", character: "Max", season: 4, episode: 7, episodeTitle: "The Massacre at Hawkins Lab", timestamp: "35:45", image: "https://picsum.photos/seed/st4e7/800/400" },
+            { id: 35, quote: "I can see it. The upside down. It's trying to tell us something.", character: "Will", season: 4, episode: 1, episodeTitle: "The Hellfire Club", timestamp: "58:00", image: "https://picsum.photos/seed/st4e1c/800/400" },
+            { id: 36, quote: "We're not the heroes. We're just the dumbasses that got caught in the crossfire.", character: "Eddie Munson", season: 4, episode: 2, episodeTitle: "Vecna's Curse", timestamp: "42:30", image: "https://picsum.photos/seed/st4e2b/800/400" },
+            { id: 37, quote: "Chrissy, wake up! Chrissy!", character: "Eddie Munson", season: 4, episode: 4, episodeTitle: "Dear Billy", timestamp: "22:15", image: "https://picsum.photos/seed/st4e4/800/400" },
+            { id: 38, quote: "I never thought I'd be the guy that people die around.", character: "Eddie Munson", season: 4, episode: 6, episodeTitle: "The Dive", timestamp: "48:20", image: "https://picsum.photos/seed/st4e6/800/400" },
+            { id: 39, quote: "I'm gonna get that son of a bitch.", character: "Hopper", season: 4, episode: 9, episodeTitle: "The Piggyback", timestamp: "75:30", image: "https://picsum.photos/seed/st4e9/800/400" },
+            { id: 40, quote: "Welcome to the family.", character: "Vecna", season: 4, episode: 9, episodeTitle: "The Piggyback", timestamp: "80:45", image: "https://picsum.photos/seed/st4e9b/800/400" },
+            { id: 41, quote: "I didn't run. I never run.", character: "Max", season: 4, episode: 9, episodeTitle: "The Piggyback", timestamp: "85:00", image: "https://picsum.photos/seed/st4e9c/800/400" },
+
+            // Season 5
+            { id: 42, quote: "At long last, we can begin.", character: "Vecna", season: 5, episode: 1, episodeTitle: "The Crawl", timestamp: "02:30", image: "https://picsum.photos/seed/st5e1/800/400" },
+            { id: 43, quote: "You and I, we are going to do such beautiful things together.", character: "Vecna", season: 5, episode: 1, episodeTitle: "The Crawl", timestamp: "03:15", image: "https://picsum.photos/seed/st5e1b/800/400" },
+            { id: 44, quote: "We don't stop looking. Even if it takes 100 more crawls.", character: "Mike Wheeler", season: 5, episode: 1, episodeTitle: "The Crawl", timestamp: "15:40", image: "https://picsum.photos/seed/st5e1c/800/400" },
+            { id: 45, quote: "I want to see Vecna's heart on a platter.", character: "Mike Wheeler", season: 5, episode: 1, episodeTitle: "The Crawl", timestamp: "18:20", image: "https://picsum.photos/seed/st5e1d/800/400" },
+            { id: 46, quote: "I'm nuts. But I'm not that nuts.", character: "Hopper", season: 5, episode: 1, episodeTitle: "The Crawl", timestamp: "28:45", image: "https://picsum.photos/seed/st5e1e/800/400" },
+            { id: 47, quote: "People are dying. Innocent people. I need the girl.", character: "Dr. Cavities", season: 5, episode: 2, episodeTitle: "The Jeff", timestamp: "12:30", image: "https://picsum.photos/seed/st5e2/800/400" },
+            { id: 48, quote: "We are all connected. Every one of us.", character: "Eleven", season: 5, episode: 2, episodeTitle: "The Jeff", timestamp: "35:15", image: "https://picsum.photos/seed/st5e2b/800/400" },
+            { id: 49, quote: "Hawkins is our home. We fight for it.", character: "Steve Harrington", season: 5, episode: 3, episodeTitle: "The Vanishing of...", timestamp: "22:40", image: "https://picsum.photos/seed/st5e3/800/400" },
+            { id: 50, quote: "The battle isn't over. It's just beginning.", character: "Will Byers", season: 5, episode: 3, episodeTitle: "The Vanishing of...", timestamp: "45:20", image: "https://picsum.photos/seed/st5e3b/800/400" },
+            { id: 51, quote: "Together, we can close the gate forever.", character: "Eleven", season: 5, episode: 4, episodeTitle: "The Testament", timestamp: "55:30", image: "https://picsum.photos/seed/st5e4/800/400" },
+            { id: 52, quote: "The upside down is a part of us now.", character: "Nancy Wheeler", season: 5, episode: 4, episodeTitle: "The Testament", timestamp: "62:15", image: "https://picsum.photos/seed/st5e4b/800/400" },
+            { id: 53, quote: "This is for Eddie.", character: "Dustin", season: 5, episode: 5, episodeTitle: "The Miracle", timestamp: "08:45", image: "https://picsum.photos/seed/st5e5/800/400" },
+            { id: 54, quote: "I've never been more scared in my life.", character: "Jonathan", season: 5, episode: 5, episodeTitle: "The Miracle", timestamp: "25:30", image: "https://picsum.photos/seed/st5e5b/800/400" },
+            { id: 55, quote: "Don't make me go back there.", character: "Max", season: 5, episode: 6, episodeTitle: "The Escape", timestamp: "18:20", image: "https://picsum.photos/seed/st5e6/800/400" },
+            { id: 56, quote: "We are the only ones who can stop this.", character: "Robin Buckley", season: 5, episode: 6, episodeTitle: "The Escape", timestamp: "42:15", image: "https://picsum.photos/seed/st5e6b/800/400" },
+            { id: 57, quote: "This ends now. All of it.", character: "Hopper", season: 5, episode: 7, episodeTitle: "The Return", timestamp: "52:40", image: "https://picsum.photos/seed/st5e7/800/400" },
+            { id: 58, quote: "I'm not leaving you. Not again.", character: "Mike Wheeler", season: 5, episode: 7, episodeTitle: "The Return", timestamp: "65:20", image: "https://picsum.photos/seed/st5e7b/800/400" },
+            { id: 59, quote: "Goodbye, my love.", character: "Joyce Byers", season: 5, episode: 8, episodeTitle: "The End", timestamp: "72:30", image: "https://picsum.photos/seed/st5e8/800/400" },
+            { id: 60, quote: "We survived. We finally made it.", character: "Dustin", season: 5, episode: 8, episodeTitle: "The End", timestamp: "85:15", image: "https://picsum.photos/seed/st5e8b/800/400" }
         ];
 
         let currentAudio = null;
         let currentBtn = null;
+        let currentFilter = 'all';
+        let searchQuery = '';
 
         const searchInput = document.getElementById('searchInput');
         const resultsContainer = document.getElementById('resultsContainer');
         const resultsInfo = document.getElementById('resultsInfo');
+        const filterTabs = document.querySelectorAll('.filter-tab');
 
         function escapeHtml(text) {
             const div = document.createElement('div');
@@ -382,13 +478,23 @@
             return escapeHtml(text).replace(regex, '<mark style="background: rgba(34, 146, 232, 0.3); color: inherit; padding: 0 2px; border-radius: 2px;">$1</mark>');
         }
 
-        function searchQuotes(query) {
-            if (!query.trim()) return [];
-            const lowerQuery = query.toLowerCase();
-            return quotes.filter(q => 
-                q.quote.toLowerCase().includes(lowerQuery) ||
-                q.character.toLowerCase().includes(lowerQuery)
-            );
+        function filterQuotes() {
+            let filtered = quotes;
+            
+            if (currentFilter !== 'all') {
+                filtered = filtered.filter(q => q.season === parseInt(currentFilter));
+            }
+            
+            if (searchQuery.trim()) {
+                const lowerQuery = searchQuery.toLowerCase();
+                filtered = filtered.filter(q => 
+                    q.quote.toLowerCase().includes(lowerQuery) ||
+                    q.character.toLowerCase().includes(lowerQuery) ||
+                    q.episodeTitle.toLowerCase().includes(lowerQuery)
+                );
+            }
+            
+            return filtered;
         }
 
         function renderResults(results, query) {
@@ -397,26 +503,37 @@
                     <div class="empty-state">
                         <div class="icon">🔍</div>
                         <h3>No quotes found</h3>
-                        <p>Try different keywords like "friends", "coffee", or "crazy"</p>
+                        <p>Try different keywords or select a different season</p>
                     </div>
                 `;
+                resultsInfo.classList.add('hidden');
                 return;
             }
 
-            resultsInfo.textContent = `${results.length} result${results.length !== 1 ? 's' : ''} found`;
+            const filterText = currentFilter === 'all' ? '' : ` Season ${currentFilter}`;
+            resultsInfo.textContent = `${results.length} result${results.length !== 1 ? 's' : ''} found${filterText}`;
             resultsInfo.classList.remove('hidden');
 
             resultsContainer.innerHTML = results.map(q => `
                 <div class="quote-card" data-id="${q.id}">
-                    <div class="quote-header">
-                        <span class="character-name">${highlightMatch(q.character, query)}</span>
-                        <span class="episode-info">S${q.season} E${q.episode} • ${q.episodeTitle}</span>
+                    <div class="quote-image">
+                        <img src="${q.image}" alt="${q.character}" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'quote-image-placeholder\\'>🎬</div>';">
+                        <span class="season-badge season-${q.season}">Season ${q.season}</span>
                     </div>
-                    <p class="quote-text">${highlightMatch(q.quote, query)}</p>
-                    <button class="audio-btn" data-audio="${q.audioUrl}" data-id="${q.id}">
-                        <span class="icon">🔊</span>
-                        <span class="text">Listen to Original Audio</span>
-                    </button>
+                    <div class="quote-content">
+                        <div class="quote-header">
+                            <span class="character-name">${highlightMatch(q.character, query)}</span>
+                            <span class="episode-info">S${q.season} E${q.episode} • ${highlightMatch(q.episodeTitle, query)}</span>
+                        </div>
+                        <p class="quote-text">${highlightMatch(q.quote, query)}</p>
+                        <div class="quote-footer">
+                            <span class="timestamp">⏱ ${q.timestamp}</span>
+                            <button class="audio-btn" data-audio="#" data-id="${q.id}">
+                                <span class="icon">🔊</span>
+                                <span class="text">Listen to Original Audio</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             `).join('');
 
@@ -427,90 +544,56 @@
 
         function handleAudioPlay(e) {
             const btn = e.currentTarget;
-            const audioUrl = btn.dataset.audio;
             const btnText = btn.querySelector('.text');
-
-            if (currentAudio && currentAudio.src === audioUrl) {
-                if (currentAudio.paused) {
-                    currentAudio.play();
-                    btn.classList.add('playing');
-                    btnText.textContent = 'Playing...';
-                } else {
-                    currentAudio.pause();
-                    currentAudio.currentTime = 0;
-                    btn.classList.remove('playing');
-                    btnText.textContent = 'Listen to Original Audio';
-                    currentBtn = null;
-                    currentAudio = null;
-                }
+            
+            // Demo - show notification
+            if (btnText.textContent === 'Audio unavailable') {
+                btnText.textContent = 'Listen to Original Audio';
                 return;
             }
-
-            if (currentAudio) {
-                currentAudio.pause();
-                currentAudio.currentTime = 0;
-                if (currentBtn) {
-                    currentBtn.classList.remove('playing');
-                    currentBtn.querySelector('.text').textContent = 'Listen to Original Audio';
-                }
-            }
-
-            currentAudio = new Audio(audioUrl);
-            currentBtn = btn;
-
-            currentAudio.addEventListener('ended', () => {
+            
+            btnText.textContent = 'Demo - Audio coming soon';
+            btn.classList.add('playing');
+            
+            setTimeout(() => {
                 btn.classList.remove('playing');
                 btnText.textContent = 'Listen to Original Audio';
-                currentAudio = null;
-                currentBtn = null;
-            });
+            }, 2000);
+        }
 
-            currentAudio.addEventListener('error', () => {
-                btn.classList.remove('playing');
-                btnText.textContent = 'Audio unavailable';
-                currentAudio = null;
-                currentBtn = null;
-            });
-
-            currentAudio.play().catch(() => {
-                btnText.textContent = 'Audio unavailable';
-            });
-
-            btn.classList.add('playing');
-            btnText.textContent = 'Playing...';
+        function updateResults() {
+            const results = filterQuotes();
+            renderResults(results, searchQuery);
         }
 
         let debounceTimer;
         searchInput.addEventListener('input', (e) => {
             clearTimeout(debounceTimer);
             debounceTimer = setTimeout(() => {
-                const query = e.target.value;
-                const results = searchQuotes(query);
-                renderResults(results, query);
+                searchQuery = e.target.value;
+                updateResults();
             }, 150);
+        });
+
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                filterTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentFilter = tab.dataset.season;
+                updateResults();
+            });
         });
 
         searchInput.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 searchInput.value = '';
-                resultsInfo.classList.add('hidden');
-                resultsContainer.innerHTML = `
-                    <div class="empty-state">
-                        <div class="icon">🎬</div>
-                        <h3>Search Stranger Things Quotes</h3>
-                        <p>Enter a phrase to find quotes from the show</p>
-                    </div>
-                `;
+                searchQuery = '';
+                updateResults();
             }
         });
 
-        resultsContainer.innerHTML = `
-            <div class="empty-state">
-                <div class="icon">🎬</div>
-                <h3>Search Stranger Things Quotes</h3>
-                <p>Enter a phrase to find quotes from the show</p>
-            </div>
-        `;
+        // Initial render
+        updateResults();
     </script>
 </body>
 </html>
